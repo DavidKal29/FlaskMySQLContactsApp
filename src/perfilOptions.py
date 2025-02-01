@@ -46,6 +46,18 @@ def editar(id):
         conexion.commit()
 
         return redirect(url_for('perfil'))
+    
+
+@options.route('/delete/<id>')
+def eliminar(id):
+    cursor=conexion.cursor()
+    sql='DELETE FROM contacts WHERE id=%s'
+    cursor.execute(sql,(id,))
+    conexion.commit()
+
+    return redirect(url_for('perfil'))
+
+
 
 
 
