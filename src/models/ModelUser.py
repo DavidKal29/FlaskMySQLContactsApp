@@ -6,10 +6,10 @@ class ModelUser:
     @classmethod
     def login(cls,conexion,user):
         cursor=conexion.cursor()
-        sql='SELECT * FROM users WHERE id=%s'
-        id=(user.id,)
+        sql='SELECT * FROM users WHERE email=%s'
+        email=(user.email,)
 
-        cursor.execute(sql,id)
+        cursor.execute(sql,email)
         row=cursor.fetchone()
 
         if row:
@@ -34,3 +34,6 @@ class ModelUser:
         cursor.execute(sql,values)
         conexion.commit()
         print('Usuario registrado con éxito')
+
+
+
