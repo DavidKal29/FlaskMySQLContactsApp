@@ -1,0 +1,35 @@
+{% extends './layout.html' %}
+
+{% block title%} Perfil {% endblock %}
+
+{% block body %}
+
+<section class="flex flex-col justify-center items-center bg-[#123456] h-screen gap-[20px]">
+    <div class="flex justify-center items-center gap-[20px]">
+        <form action="/options/edit/{{datos[0][0]}}" method="post" class="bg-white w-[50vh] h-[75vh] rounded flex flex-col justify-around items-center">
+            <h1 class="font-bold text-[#123456] text-[30px] font-bold">Agregar Contactos <i class="fa-solid fa-address-book"></i> </h1>
+            <span class="text-center text-[#123456]">Rellena los datos para agregar nuevo contacto</span>
+
+            <div class="flex flex-col justify-center items-start">
+                <label class="font-bold text-[20px] text-[#123456]">Fullname <i class="fa-solid fa-user"></i> </label>
+                <input type="text" class="border-[1px] rounded bg-[#123456] text-white placeholder-white py-[6px] px-[36px]" placeholder="John Jones" required name="fullname" value="{{ datos[0][1] }}">
+            </div>
+
+            <div class="flex flex-col justify-center items-start">
+                <label class="font-bold text-[20px] text-[#123456]">Phone <i class="fa-solid fa-phone"></i></label>
+                <input type="number" class="border-[1px] rounded bg-[#123456] text-white placeholder-white py-[6px] px-[36px]" placeholder="123456789" required name="phone" min="0" value="{{ datos[0][2] }}">
+            </div>
+
+            <div class="flex flex-col justify-center items-start">
+                <label class="font-bold text-[20px] text-[#123456]">Email <i class="fa-solid fa-envelope"></i> </label>
+                <input type="email" class="border-[1px] rounded bg-[#123456] text-white placeholder-white py-[6px] px-[36px]" placeholder="ejemplo@ejemplo.com" required name="email" value="{{ datos[0][3] }}">
+            </div>
+
+            <button type="submit" class="bg-[#123456] text-white font-bold py-[10px] px-[26px] rounded cursor-pointer">Editar Contacto</button>
+        </form>
+    </div>
+    <button class="bg-white"><a href="/perfil">Volver</a></button>
+</section>
+
+
+{% endblock %}

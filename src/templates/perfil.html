@@ -29,6 +29,7 @@
             <button type="submit" class="bg-[#123456] text-white font-bold py-[10px] px-[26px] rounded cursor-pointer">Agregar Contacto</button>
         </form>
 
+        {% if contactos %}
         <table class="rounded bg-white w-[80vh]">
             <tr class="border-[1px]">
                 <th class="border-[1px]">Id</th>
@@ -38,7 +39,6 @@
                 <th class="border-[1px]">Options</th>
             </tr>
 
-            {% if contactos %}
             {% for contacto in contactos %}
             <tr class="border-[1px] h-[30px]">
                 <td class="border-[1px] p-[8px]">{{contacto[0]}}</td>
@@ -48,7 +48,7 @@
                 <td class=" flex justify-center items-center gap-[5px] p-[8px]"><button class="bg-green-500 rounded text-white py-[1px] px-[10px]  cursor-pointer"><a href="/options/edit/{{contacto[0]}}">Editar</a></button><button class="bg-red-500 rounded text-white py-[1px] px-[10px] cursor-pointer"><a href="/options/delete/{{contacto[0]}}">Eliminar</a></button></td>
             </tr>
             {% endfor %}
-            {% endif %}
+        {% endif %}
 
             
         </table>

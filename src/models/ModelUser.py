@@ -52,7 +52,3 @@ class ModelUser:
             return User(id,username,email,None)
         else:
             return False
-        
-
-
-
