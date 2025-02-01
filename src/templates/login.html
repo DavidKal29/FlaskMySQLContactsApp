@@ -5,9 +5,9 @@
 {% block body %}
 <section class="flex flex-col justify-center items-center bg-[#123456] h-screen">
     <form action="/login" method="post" class="bg-white w-[50vh] h-[70vh] rounded flex flex-col justify-around items-center">
-        <h1 class="font-bold text-[#123456]">Login <i class="fa-solid fa-user text-[#123456]"></i> </h1>
+        <h1 class="font-bold text-[#123456] text-[50px] font-bold">Login <i class="fa-solid fa-user text-[#123456]"></i> </h1>
         
-        <div class="flex flex-col justify-center items-center gap-[15px]">
+        <div class="flex flex-col justify-center items-center gap-[35px]">
             <!-- <div class="flex flex-col justify-center items-start">
                 <label class="font-bold text-[20px] text-[#123456]">Username <i class="fa-solid fa-envelope"></i> </label>
                 <input type="text" class="border-[1px] rounded bg-[#123456] text-white placeholder-white py-[6px] px-[16px]" placeholder="Username" required name="username">
@@ -15,16 +15,16 @@
 
             <div class="flex flex-col justify-center items-start">
                 <label class="font-bold text-[20px] text-[#123456]">Email <i class="fa-solid fa-envelope"></i> </label>
-                <input type="email" class="border-[1px] rounded bg-[#123456] text-white placeholder-white py-[6px] px-[16px]" placeholder="ejemplo@ejemplo.com" required name="email">
+                <input type="email" class="border-[1px] rounded bg-[#123456] text-white placeholder-white py-[6px] px-[36px]" placeholder="ejemplo@ejemplo.com" required name="email">
             </div>
     
             <div class="flex flex-col justify-center items-start">
                 <label class="font-bold text-[20px] text-[#123456]">Password <i class="fa-solid fa-lock"></i> </label>
-                <input type="password" class="border-[1px] rounded bg-[#123456] text-white placeholder-white py-[6px] px-[16px]" placeholder="1234" required name="password">
+                <input type="password" class="border-[1px] rounded bg-[#123456] text-white placeholder-white py-[6px] px-[36px]" placeholder="1234" required name="password">
             </div>
         </div>
 
-        <button type="submit" class="bg-[#123456] text-white font-bold py-[10px] px-[26px] rounded">Iniciar Sesión</button>
+        <button type="submit" class="bg-[#123456] text-white font-bold py-[10px] px-[26px] rounded cursor-pointer">Iniciar Sesión</button>
     </form>
 </section>
 {% endblock %}

@@ -7,7 +7,7 @@ from models.ModelUser import ModelUser
 from models.entities.User import User
 import sys
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'src')))
+#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'src')))
 
 load_dotenv()
 
@@ -73,8 +73,17 @@ def logout():
     return redirect(url_for('login'))
 
 
+def status_404(error):
+    return render_template('error404.html')
+
+def status_401(error):
+    return redirect(url_for('login'))
+
+
 
 
 
 if __name__=='__main__':
+    app.register_error_handler(404,status_404)
+    app.register_error_handler(401,status_401)
     app.run(debug=True)
