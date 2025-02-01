@@ -13,6 +13,10 @@ def index():
 def login():
     return render_template('login.html')
 
+@app.route('/perfil',methods=['GET'])
+def perfil():
+    return render_template('perfil.html')
+
 
 
 
