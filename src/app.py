@@ -1,13 +1,12 @@
 from flask import Flask,render_template,flash,url_for,redirect,request
 from flask_login import LoginManager, login_user,logout_user, login_required,current_user
-import mysql.connector
+from database import conexion
 import os
 from dotenv import load_dotenv
 from models.ModelUser import ModelUser
 from models.entities.User import User
-import sys
+from perfilOptions import options
 
-#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'src')))
 
 load_dotenv()
 
@@ -15,14 +14,11 @@ app=Flask(__name__)
 app.secret_key=os.getenv('SECRET_KEY')
 loginManager=LoginManager(app)
 
+app.register_blueprint(options)
 
 
-conexion=mysql.connector.connect(
-    host=os.getenv('HOST'),
-    user=os.getenv('USER'),
-    password=os.getenv('PASSWORD'),
-    db=os.getenv('DATABASE')
-)
+
+
 
 print(conexion)
 
@@ -63,7 +59,10 @@ def login():
 @app.route('/perfil',methods=['GET'])
 @login_required
 def perfil():
-    return render_template('perfil.html')
+    cursor=conexion.cursor()
+    cursor.execute('SELECT id,fullname,phone,email FROM contacts WHERE id_user=%s',(current_user.id,))
+    contactos=cursor.fetchall()
+    return render_template('perfil.html',contactos=contactos)
 
 
 

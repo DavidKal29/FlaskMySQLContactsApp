@@ -3,10 +3,11 @@
 {% block title%} Perfil {% endblock %}
 
 {% block body %}
+
 <section class="flex flex-col justify-center items-center bg-[#123456] h-screen gap-[20px]">
     <h1 class="font-bold text-white text-[20px] font-bold">Saludos {{current_user.username}}</h1>
     <div class="flex justify-center items-center gap-[20px]">
-        <form action="/perfil" method="post" class="bg-white w-[50vh] h-[75vh] rounded flex flex-col justify-around items-center">
+        <form action="/options/agregar" method="post" class="bg-white w-[50vh] h-[75vh] rounded flex flex-col justify-around items-center">
             <h1 class="font-bold text-[#123456] text-[30px] font-bold">Agregar Contactos <i class="fa-solid fa-address-book"></i> </h1>
             <span class="text-center text-[#123456]">Rellena los datos para agregar nuevo contacto</span>
 
@@ -16,34 +17,38 @@
             </div>
 
             <div class="flex flex-col justify-center items-start">
-                <label class="font-bold text-[20px] text-[#123456]">Email <i class="fa-solid fa-envelope"></i> </label>
-                <input type="email" class="border-[1px] rounded bg-[#123456] text-white placeholder-white py-[6px] px-[36px]" placeholder="ejemplo@ejemplo.com" required name="email">
-            </div>
-
-            <div class="flex flex-col justify-center items-start">
                 <label class="font-bold text-[20px] text-[#123456]">Phone <i class="fa-solid fa-phone"></i></label>
                 <input type="number" class="border-[1px] rounded bg-[#123456] text-white placeholder-white py-[6px] px-[36px]" placeholder="123456789" required name="phone" min="0">
             </div>
 
-            <button class="bg-[#123456] text-white font-bold py-[10px] px-[26px] rounded cursor-pointer">Agregar Contacto</button>
+            <div class="flex flex-col justify-center items-start">
+                <label class="font-bold text-[20px] text-[#123456]">Email <i class="fa-solid fa-envelope"></i> </label>
+                <input type="email" class="border-[1px] rounded bg-[#123456] text-white placeholder-white py-[6px] px-[36px]" placeholder="ejemplo@ejemplo.com" required name="email">
+            </div>
+
+            <button type="submit" class="bg-[#123456] text-white font-bold py-[10px] px-[26px] rounded cursor-pointer">Agregar Contacto</button>
         </form>
 
-        <table class="rounded bg-white border-[1px] w-[80vh]">
+        <table class="rounded bg-white w-[80vh]">
             <tr class="border-[1px]">
                 <th class="border-[1px]">Id</th>
                 <th class="border-[1px]">Fullname</th>
-                <th class="border-[1px]">Email</th>
                 <th class="border-[1px]">Phone</th>
+                <th class="border-[1px]">Email</th>
                 <th class="border-[1px]">Options</th>
             </tr>
-            
+
+            {% if contactos %}
+            {% for contacto in contactos %}
             <tr class="border-[1px] h-[30px]">
-                <td class="border-[1px] p-[8px]">1</td>
-                <td class="border-[1px] p-[8px]">David Kalmuk</td>
-                <td class="border-[1px] p-[8px]">david@gmail.com</td>
-                <td class="border-[1px] p-[8px]">123456789</td>
-                <td class=" flex justify-center items-center gap-[5px] p-[8px]"><button class="bg-green-500 rounded text-white py-[1px] px-[10px]">Editar</button><button class="bg-red-500 rounded text-white py-[1px] px-[10px]">Eliminar</button></td>
+                <td class="border-[1px] p-[8px]">{{contacto[0]}}</td>
+                <td class="border-[1px] p-[8px]">{{contacto[1]}}</td>
+                <td class="border-[1px] p-[8px]">{{contacto[2]}}</td>
+                <td class="border-[1px] p-[8px]">{{contacto[3]}}</td>
+                <td class=" flex justify-center items-center gap-[5px] p-[8px]"><button class="bg-green-500 rounded text-white py-[1px] px-[10px]  cursor-pointer"><a href="/options/edit/{{contacto[0]}}">Editar</a></button><button class="bg-red-500 rounded text-white py-[1px] px-[10px] cursor-pointer"><a href="/options/delete/{{contacto[0]}}">Eliminar</a></button></td>
             </tr>
+            {% endfor %}
+            {% endif %}
 
             
         </table>
