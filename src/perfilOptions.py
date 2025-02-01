@@ -57,6 +57,16 @@ def eliminar(id):
 
     return redirect(url_for('perfil'))
 
+@options.route('/delete_all/<id>')
+def delete_all(id):
+    cursor=conexion.cursor()
+    sql='DELETE FROM contacts WHERE id_user=%s'
+    cursor.execute(sql,(id,))
+    conexion.commit()
+
+    return redirect(url_for('perfil'))
+
+
 
 
 
