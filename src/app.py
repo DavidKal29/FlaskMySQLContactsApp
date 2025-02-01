@@ -11,8 +11,10 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'src')))
 
 load_dotenv()
 
-
 app=Flask(__name__)
+loginManager=LoginManager(app)
+
+
 conexion=mysql.connector.connect(
     host=os.getenv('HOST'),
     user=os.getenv('USER'),
@@ -21,6 +23,10 @@ conexion=mysql.connector.connect(
 )
 
 print(conexion)
+
+@loginManager.user_loader
+def load_user(id):
+    return ModelUser(conexion,id)
 
 @app.route('/')#ruta que enviará directamente al login
 def index():
@@ -39,6 +45,7 @@ def login():
         logged_user=ModelUser.login(conexion,user)
         if logged_user:
             if logged_user.password:
+                login_user(logged_user)
                 return redirect(url_for('perfil'))
             else:
                 return 'Contraseña incorrecta'
@@ -49,6 +56,7 @@ def login():
 
 
 @app.route('/perfil',methods=['GET'])
+@login_required
 def perfil():
     return render_template('perfil.html')
 

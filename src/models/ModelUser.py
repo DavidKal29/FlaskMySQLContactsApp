@@ -35,5 +35,24 @@ class ModelUser:
         conexion.commit()
         print('Usuario registrado con éxito')
 
+    @classmethod
+    def get_by_id(cls,conexion,id):
+        cursor=conexion.cursor()
+        sql='SELECT * FROM users WHERE id=%s'
+
+        cursor.execute(sql,(id,))
+        row=cursor.fetchone()
+
+        if row:
+            id=row[0]
+            username=row[1]
+            email=row[2]
+            #el password da igual, pa que lo queremos
+        
+            return User(id,username,email,None)
+        else:
+            return False
+        
+
 
 
