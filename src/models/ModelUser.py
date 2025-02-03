@@ -31,8 +31,12 @@ class ModelUser:
         encripted_password=generate_password_hash(user.password)
         values=(user.username,user.email,encripted_password)
 
-        cursor.execute(sql,values)
-        conexion.commit()
+        try:
+            cursor.execute(sql,values)
+            conexion.commit()
+        except:
+            return None
+
         
         sql='SELECT * FROM users WHERE email=%s'
         cursor.execute(sql,(user.email,))

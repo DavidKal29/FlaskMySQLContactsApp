@@ -74,15 +74,11 @@ def register():
         registred_user=ModelUser.registrar(conexion,user)
 
         if registred_user:
-            if registred_user.password:
-                login_user(registred_user)
-                return redirect(url_for('perfil'))
-            else:
-                flash('Error al registrar')
-                return render_template('/register')
+            login_user(registred_user)
+            return redirect(url_for('perfil'))
         else:
-            flash('Error al registrar')
-            return render_template('/register')
+            flash('Usuario ya existe')
+            return render_template('register.html')
 
 
 
