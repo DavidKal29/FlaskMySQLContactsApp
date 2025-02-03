@@ -3,16 +3,20 @@
 {% block title%} Login {% endblock %}
 
 {% block body %}
-<section class="flex flex-col justify-center items-center bg-[#123456] h-screen">
+<section class="flex flex-col justify-center items-center bg-[#123456] h-screen gap-[10px]">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="a" role="alert">
+        <p class="text-red-600">{{message}}</p>
+
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
     <form action="/login" method="post" class="bg-white w-[50vh] h-[70vh] rounded flex flex-col justify-around items-center">
         <h1 class="font-bold text-[#123456] text-[50px] font-bold">Login <i class="fa-solid fa-user text-[#123456]"></i> </h1>
-        
         <div class="flex flex-col justify-center items-center gap-[35px]">
-            <!-- <div class="flex flex-col justify-center items-start">
-                <label class="font-bold text-[20px] text-[#123456]">Username <i class="fa-solid fa-envelope"></i> </label>
-                <input type="text" class="border-[1px] rounded bg-[#123456] text-white placeholder-white py-[6px] px-[16px]" placeholder="Username" required name="username">
-            </div> -->
-
             <div class="flex flex-col justify-center items-start">
                 <label class="font-bold text-[20px] text-[#123456]">Email <i class="fa-solid fa-envelope"></i> </label>
                 <input type="email" class="border-[1px] rounded bg-[#123456] text-white placeholder-white py-[6px] px-[36px]" placeholder="ejemplo@ejemplo.com" required name="email">

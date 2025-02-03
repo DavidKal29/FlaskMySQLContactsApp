@@ -49,9 +49,11 @@ def login():
                 login_user(logged_user)
                 return redirect(url_for('perfil'))
             else:
-                return 'Contraseña incorrecta'
+                flash('Datos Invalidos')
+                return render_template('login.html')
         else:
-            return 'Email incorrecto'
+            flash('Datos Invalidos')
+            return render_template('login.html')
 
 
 
