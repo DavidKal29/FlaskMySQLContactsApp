@@ -29,11 +29,25 @@ class ModelUser:
         sql='INSERT INTO users (username,email,password) VALUES (%s,%s,%s)'
         
         encripted_password=generate_password_hash(user.password)
-        values=(user.id,user.username,user.email,encripted_password)
+        values=(user.username,user.email,encripted_password)
 
         cursor.execute(sql,values)
         conexion.commit()
-        print('Usuario registrado con éxito')
+        
+        sql='SELECT * FROM users WHERE email=%s'
+        cursor.execute(sql,(user.email,))
+        row=cursor.fetchone()
+
+        if row:
+            id=row[0]
+            username=row[1]
+            email=row[2]
+            password=check_password_hash(row[3],user.password)
+
+            return User(id,username,email,password)
+        else:
+            return None
+
 
     @classmethod
     def get_by_id(cls,conexion,id):

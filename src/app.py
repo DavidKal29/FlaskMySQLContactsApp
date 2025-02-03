@@ -54,6 +54,37 @@ def login():
         else:
             flash('Datos Invalidos')
             return render_template('login.html')
+        
+
+@app.route('/register',methods=['GET','POST'])
+def register():
+    if request.method=='GET':
+        if current_user.is_authenticated:
+            return redirect(url_for('perfil'))
+        else:
+            return render_template('register.html')
+    
+    elif request.method=='POST':
+        username=request.form['username']
+        email=request.form['email']
+        password=request.form['password']
+
+        user=User(0,username,email,password)
+
+        registred_user=ModelUser.registrar(conexion,user)
+
+        if registred_user:
+            if registred_user.password:
+                login_user(registred_user)
+                return redirect(url_for('perfil'))
+            else:
+                flash('Error al registrar')
+                return render_template('/register')
+        else:
+            flash('Error al registrar')
+            return render_template('/register')
+
+
 
 
 
